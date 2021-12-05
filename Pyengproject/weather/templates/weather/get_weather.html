@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Приложение погоды</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+          crossorigin="anonymous">
+</head>
+<body>
+    <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
+        <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+            <span class="fs-4">Приложение погоды</span>
+        </a>
+
+      <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+          <a class="me-3 py-2 text-dark text-decoration-none" href="#">Главная</a>
+          <a class="me-3 py-2 text-dark text-decoration-none" href="#">Инфо</a>
+          <a class="me-3 py-2 text-dark text-decoration-none" href="#">Дока</a>
+      </nav>
+    </div>
+    <div class="container">
+         <div class = "row">
+             <h1>Введите город</h1>
+             <form action="" method="post">
+                 {% csrf_token %}
+                 <label for="city">Город</label>
+                 <input type="text" id = "city" class="form-control"
+                 name="city" placeholder="Введите город">
+                 <input type="submit" value="Узнать"
+                 name="send" class="mt-2 btn btn-danger">
+             </form>
+        </div>
+    </div>
+    <div class="container">
+        <h1>Погода в вашем городе</h1>
+        <div class = "row">
+            <div class = "col-5 offset 1">
+                <h3>Сейчас</h3>
+                <div class="alert alert-info">
+                    <div class="row">
+                        <div class="col-9">
+                            <b>Город:</b>{{ today_city_info.city }}<br>
+                            <b>Температура:</b>{{ today_city_info.temp }}<sup>0</sup><br>
+                            <b>{{ today_city_info.icon_text }}</b><br>
+                        </div>
+                        <div class="col-2 offset-1">
+                            <img src="{{ today_city_info.icon }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class = "col-4 offset 1">
+                <h3>Завтра</h3>
+                <div class="alert alert-info">
+                    <div class="row">
+                        <div class="col-9">
+                            <b>Город:</b>{{ tomorrow_city_info.city }}<br>
+                            <b>Средняя дневная темепартура:</b>{{ tomorrow_city_info.temp }}<sup>0</sup><br>
+                            <b>{{ tomorrow_city_info.icon_text }}</b><br>
+                        </div>
+                        <div class="col-2 offset-1">
+                            <img src="{{ tomorrow_city_info.icon }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
